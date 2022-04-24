@@ -1,0 +1,66 @@
+<!--Groceries tab-->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!--title of the tab-->
+    <ion-title>
+      <!--Interpolation to tab1.page.ts file calls upon title-->
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!--Body-->
+  <!-- List of Text Items -->
+  <ion-list>
+    <!--Shows user a message if cart is empty-->
+    <!--<h3 class="no-item" *ngIf='loadItems().length ===0'>Your cart is empty</h3>-->
+    <!--Item bread that has sliding capability-->
+    <ion-item-sliding *ngFor="let item of loadItems(); let i = index">
+      <ion-item>
+        <ion-label>
+          <!--Interpolation to tab1.page.ts file calls upon item.name and item.quantity-->
+          <h2>{{item.name}}</h2>
+          <p>{{item.quantity}}</p>
+        </ion-label>
+      </ion-item>
+      <!--Interaction when sliding-->
+      <ion-item-options>
+        <!--Edit function-->
+        <!--remove function will remove from the array-->
+        <button (click)="editItem(item, i)">
+          <ion-icon name="create" ion-button color="primary" icon-start></ion-icon>
+          Edit
+        </button>
+        <!--share function will share from the array-->
+        <button (click)="shareItem(item, i)">
+          <ion-icon name="share-social-outline" ion-button color="secondary" icon-start></ion-icon>
+          Share
+        </button>
+        <!--remove function will remove from the array-->
+        <button (click)="removeItem(item, i)">
+          <ion-icon name="trash" ion-button color="danger" icon-start></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <!--FAB-->
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <!--Add icon that user can click to add grocery item-->
+    <ion-fab-button (click)="addItem()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <app-explore-container name="Groceries Tab"></app-explore-container>
+</ion-content>
